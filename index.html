@@ -18,74 +18,62 @@
   </head>
   <body>
     <!-- Start Header -->
-    <header>
-      <nav>
-        <ul>
-          <li>
-            <a href="#">about me</a>
-          </li>
-          <li>
-            <a href="#">experience</a>
-          </li>
-          <li>
-            <a href="#">skills</a>
-          </li>
-          <li>
-            <a href="#">contacts</a>
-          </li>
-        </ul>
-      </nav>
-
-      <button>💛</button>
-
-      <a href="articles.html">💛 Artigos</a>
-
+    <header class="header">
+      <a class="header__btn">💛 Curriculum</a>
+      <a class="header__btn">💛 Articles</a>
       <!-- <img src="assets/picture.png" alt="" /> -->
     </header>
     <!-- End Header-->
 
-    <section id="about_me">
-      <strong>💥 5 clients</strong>
-      <strong>💥 8 projects</strong>
-      <strong>💥 3+ experience years</strong>
+    <section id="about">
+      <div class="about__resume">
+        <strong>💥 5 clients</strong>
+        <strong>💥 8 projects</strong>
+        <strong>💥 3+ experience years</strong>
+      </div>
 
-      <h1>Hi, my name is Diana Regina know more about me</h1>
+      <div class="about__content">
+        <h1>Hi, my name is Diana Regina</h1>
 
-      <p>
-        Sou apaixonada por programação, focada em desenvolvimento de software
-        web com enfase no frontend. Com mais de 3 anos de experiência na criação
-        de soluções de software inovadoras, meu objetivo é impulsionar a
-        transformação digital através da codificação eficiente e da resolução
-        criativa de problemas.
-      </p>
+        <p>
+          I am passionate about programming, focused on web software development
+          with an emphasis on the frontend. With over 3 years of experience
+          creating innovative software solutions, my goal is to drive digital
+          transformation through efficient coding and creative problem solving.
+        </p>
+      </div>
     </section>
 
     <!-- Start Experience Section -->
     <section id="experience">
       <h1>💜 experience</h1>
 
-      <time pubdate>2020 | moment</time>
-      <h2>Software Developer - Rebase</h2>
+      <div class="experience__inner">
+        <div>
+          <time pubdate>2020 | moment</time>
+          <h2>Software Developer - Rebase</h2>
 
-      <ul>
-        <li>
-          I work with several clients developing software such as Finbits, Banco
-          BV, C&A, Vagas.com and Videocamp
-        </li>
+          <ul>
+            <li>
+              - I work with several clients developing software such as Finbits,
+              Banco BV, C&A, Vagas.com and Videocamp
+            </li>
 
-        <li>
-          I worked on the development of the company's current landpage
-          <a
-            href="https://www.rebase.com.br/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            https://www.rebase.com.br/
-          </a>
-        </li>
+            <li>
+              - I worked on the development of the company's current landpage
+              <a
+                href="https://www.rebase.com.br/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                https://www.rebase.com.br/
+              </a>
+            </li>
 
-        <li>Monitored the onboarding of new developers</li>
-      </ul>
+            <li>- Monitored the onboarding of new developers</li>
+          </ul>
+        </div>
+      </div>
     </section>
     <!-- End Experience Section -->
 
@@ -93,35 +81,50 @@
     <section id="education">
       <h1>💜 education</h1>
 
-      <time pubdate>2017 | 2020</time>
-      <h2>Industrial Mechatronics (Fatec)</h2>
-      <p>
-        Activities and groups: InterFatecs programming marathon - 1st Phase -
-        2019 Participation in the Fatec Santo André Programming Team - 2017,
-        2018 and 2019. Programming Monitoring - 2019
-      </p>
+      <div class="education__inner">
+        <div>
+          <time pubdate>Junho - Agosto de 2023</time>
+          <h2>GirlsInCloud - dataRain - WoMakersCode</h2>
+          <p>
+            Training focused on cloud computing for a class of 200 students made
+            by instructors from dataRain consultancy with support from AWS and
+            WoMakersCode community.
+          </p>
+        </div>
 
-      <time pubdate>Junho - Agosto de 2023</time>
-      <h2>GirlsInCloud - dataRain - WoMakersCode</h2>
-      <p>
-        Training focused on cloud computing for a class of 200 students made by
-        instructors from dataRain consultancy with support from AWS and
-        WoMakersCode community.
-      </p>
+        <div>
+          <time pubdate>Fevereiro - Julho de 2020</time>
+          <h2>Treina Dev - Campus Code</h2>
+          <p>
+            Training focused on developing Ruby and Ruby on applications Rails
+            as a team, using agile methodologies and good practices such as pair
+            programming, code review and ceremonies (dailys and plannings).
+          </p>
+        </div>
 
-      <time pubdate>Fevereiro - Julho de 2020</time>
-      <h2>Treina Dev - Campus Code</h2>
-      <p>
-        Training focused on developing Ruby and Ruby on applications Rails as a
-        team, using agile methodologies and good practices such as pair
-        programming, code review and ceremonies (dailys and plannings).
-      </p>
+        <div>
+          <time pubdate>Fevereiro - Julho de 2020</time>
+          <h2>React Bootcamp - WoMakersCode</h2>
+          <p>
+            Training focused on library development and learning React.
+          </p>
+        </div>
 
-      <time pubdate>Fevereiro - Julho de 2020</time>
-      <h2>React Bootcamp - WoMakersCode</h2>
-      <p>
-        Training focused on library development and learning React.
-      </p>
+        <div>
+          <time pubdate>2017 | 2020</time>
+          <h2>Industrial Mechatronics - Fatec</h2>
+          <ul>
+            <li>- Participation in InterFatecs programming marathon</li>
+
+            <li>
+              - Participation in the Fatec Santo André Programming Team at 2017,
+              2018 and 2019.
+            </li>
+
+            <li>- C language programming monitoring</li>
+          </ul>
+        </div>
+      </div>
     </section>
     <!-- End Education Section -->
 
@@ -129,31 +132,57 @@
     <section id="skills">
       <h1>💜 skills</h1>
 
-      <h2>frontend</h2>
-      <p>
-        HTML5, CSS, JavaScript, Material-UI, Typescript, Vue, AntDesign, Jest
-      </p>
+      <div class="skills__inner">
+        <div>
+          <h2>frontend</h2>
+          <p>
+            HTML5, CSS, JavaScript, Material-UI, Typescript, Vue, AntDesign,
+            Jest
+          </p>
+        </div>
 
-      <h2>backend</h2>
-      <p>Ruby, Elixir, C, Python</p>
+        <div>
+          <h2>backend</h2>
+          <p>Ruby, Elixir, C, Python</p>
+        </div>
 
-      <h2>cloud</h2>
-      <p>AWS</p>
+        <div>
+          <h2>cloud</h2>
+          <p>AWS</p>
+        </div>
 
-      <h2>tools</h2>
-      <p>Git</p>
+        <div>
+          <h2>tools</h2>
+          <p>Git</p>
+        </div>
+      </div>
     </section>
-
     <!-- End Skills Section -->
 
     <!-- Start Footer -->
-    <footer class="center-between">
+    <footer class="footer">
       <p>made with 💕 by Diana Regina</p>
       <nav>
         <ul class="flex">
-          <li><a href="#">linkedin</a></li>
-          <li><a href="#">github</a></li>
-          <li><a href="#">email</a></li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/diana-regina/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              linkedin
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/reginadiana"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              github
+            </a>
+          </li>
+          <li><a href="mailto:dianaregina22@outlook.com.br">email</a></li>
         </ul>
       </nav>
     </footer>

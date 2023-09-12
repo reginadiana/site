@@ -1,0 +1,15 @@
+.experience__inner {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+
+  gap: 32px;
+}
+
+@media (min-width: 890px) {
+  .experience__inner {
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}
