@@ -14,6 +14,8 @@
   --screen-mobile: 320;
   --screen-tablet: 890;
   --screen-desktop: 1200;
+
+  --gap: 8px;
 }
 
 ::-moz-selection { /* Code for Firefox */
@@ -36,6 +38,9 @@ body {
   justify-content: space-between;
   
   height: 100vh;
+
+  /* Chrome */
+  zoom: 2; 
 }
 
 ul {
@@ -62,6 +67,7 @@ strong,
 button {
   margin: 0;
   color: var(--color-white);
+  line-height: 32px;
 }
 
 header, section {
@@ -81,4 +87,13 @@ header, section, footer {
 .flex {
   display: flex;
   gap: 1rem;
+}
+
+.mb {
+  margin-bottom: var(--gap);
+}
+
+.clip {
+  background-color: var(--color-purple);
+  color: var(--color-black);
 }
