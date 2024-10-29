@@ -1,0 +1,11 @@
+.resume__container {
+  height: 100%;
+  color: #fff;
+  margin-bottom: 240px;
+  display: flex;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
