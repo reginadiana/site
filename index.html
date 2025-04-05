@@ -21,6 +21,14 @@
         <a href="./curriculo.html">💛 Curriculo</a>
         <a href="./articles.html">💛 Artigos</a>
       </nav>
+      <div class="language-toggle-container">
+        <span class="lang-label">PT</span>
+        <label class="language-toggle">
+          <input type="checkbox" id="language-switch" aria-label="Toggle language">
+          <span class="slider"></span>
+        </label>
+        <span class="lang-label">EN</span>
+      </div>
     </div>
   </header>
   <!-- End Header-->
@@ -310,47 +318,200 @@
   </footer>
   <!-- End Footer -->
 
+  <!-- Scripts -->
+  <script src="scripts/translations.js"></script>
+  <script src="scripts/language.js"></script>
+  <script src="scripts/index-translations.js"></script>
   <script>
-    const themeToggle = document.getElementById('theme-toggle');
-    const scrollToTopButton = document.getElementById('scroll-to-top');
-    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-    
-    // Check for saved theme preference or use system preference
-    const currentTheme = localStorage.getItem('theme') || 
-      (prefersDarkScheme.matches ? 'dark' : 'light');
-    
-    // Apply the saved theme
-    document.body.setAttribute('data-theme', currentTheme);
-    updateThemeIcon(currentTheme);
-    
-    // Toggle theme on button click
-    themeToggle.addEventListener('click', () => {
-      const newTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-      document.body.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      updateThemeIcon(newTheme);
-    });
-    
-    function updateThemeIcon(theme) {
-      themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
-    }
-
-    // Handle scroll behavior for theme toggle
-    window.addEventListener('scroll', function() {
-      const scrollPosition = window.scrollY + window.innerHeight;
-      const footer = document.querySelector('footer');
-      const footerPosition = footer.offsetTop;
-
-      if (scrollPosition >= footerPosition) {
-        themeToggle.classList.add('hidden');
-      } else {
-        themeToggle.classList.remove('hidden');
+    document.addEventListener('DOMContentLoaded', function() {
+      // Theme toggle functionality
+      const themeToggle = document.getElementById('theme-toggle');
+      const scrollToTopButton = document.getElementById('scroll-to-top');
+      const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+      
+      // Check for saved theme preference or use system preference
+      const currentTheme = localStorage.getItem('theme') || 
+        (prefersDarkScheme.matches ? 'dark' : 'light');
+      
+      // Apply the saved theme
+      document.body.setAttribute('data-theme', currentTheme);
+      updateThemeIcon(currentTheme);
+      
+      // Toggle theme on button click
+      themeToggle.addEventListener('click', () => {
+        const newTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        document.body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+      });
+      
+      function updateThemeIcon(theme) {
+        themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
       }
-    });
 
-    // Scroll to top functionality
-    scrollToTopButton.addEventListener('click', function() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Handle scroll behavior for theme toggle
+      window.addEventListener('scroll', function() {
+        const scrollPosition = window.scrollY + window.innerHeight;
+        const footer = document.querySelector('footer');
+        const footerPosition = footer.offsetTop;
+
+        if (scrollPosition >= footerPosition) {
+          themeToggle.classList.add('hidden');
+        } else {
+          themeToggle.classList.remove('hidden');
+        }
+      });
+
+      // Scroll to top functionality
+      scrollToTopButton.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Language toggle functionality
+      const languageSwitch = document.getElementById('language-switch');
+      console.log('Language switch element:', languageSwitch);
+      
+      if (languageSwitch) {
+        // Always set Portuguese as default, but respect saved preferences
+        const savedLanguage = localStorage.getItem('language');
+        const currentLanguage = savedLanguage || 'pt';
+        console.log('Current language:', currentLanguage);
+        
+        // Apply the language
+        document.body.setAttribute('data-language', currentLanguage);
+        languageSwitch.checked = currentLanguage === 'en';
+        
+        // If saved language is English, update content accordingly
+        if (currentLanguage === 'en') {
+          updateContent('en');
+        } else {
+          // Force Portuguese otherwise
+          localStorage.setItem('language', 'pt');
+        }
+        
+        // Toggle language on switch change
+        languageSwitch.addEventListener('change', function() {
+          console.log('Toggle clicked, new state:', this.checked);
+          const newLanguage = this.checked ? 'en' : 'pt';
+          document.body.setAttribute('data-language', newLanguage);
+          localStorage.setItem('language', newLanguage);
+          updateContent(newLanguage);
+        });
+      } else {
+        console.error('Language switch element not found!');
+      }
+      
+      // Translations for index.html
+      const translations = {
+        en: {
+          'nav-curriculum': '💛 Resume',
+          'nav-articles': '💛 Articles',
+          'about-title': '💜 Diana Regina',
+          'about-intro': 'I have a degree in Industrial Mechatronics and have been working as a frontend developer for over 5 years.',
+          'journey-1': 'I started my career working at a consultancy with React, Vue, Typescript, Rails, and Elixir for companies like C&A, Banco BV, and Vagas.com.',
+          'journey-2': 'I worked at the startup Finbits, a company focused on B2B treasury for over a year, developing features and migrating between UI libraries.',
+          'journey-3': 'I participated in the GirlsInCloud program by dataRain and WoMakersCode, expanding my knowledge in cloud computing.',
+          'journey-4': 'I\'m currently at Tino, a startup focused on lending to SMEs in Brazil, leading frontend checkout development.',
+          'values-title': 'My values',
+          'value-1': 'Develop products with high quality and experience for users',
+          'value-2': 'Meet company needs',
+          'value-3': 'Innovate and participate in decisions',
+          'value-4': 'Share knowledge',
+          'value-5': 'Work with autonomy and flexibility',
+          'skills-title': '💜 Skills',
+          'frontend-title': 'Frontend Languages',
+          'backend-title': 'Backend Languages',
+          'technologies-title': 'Technologies',
+          'testing-title': 'Testing',
+          'design-title': 'Design',
+          'cloud-title': 'Cloud & Tools',
+          'experience-title': '💜 Experience',
+          'experience-tino-title': 'Frontend Software Developer (Senior) - Tino',
+          'education-title': '💜 Education',
+          'footer-made': 'made with 💕 by Diana Regina',
+          // Add more translations as needed
+        },
+        pt: {
+          'nav-curriculum': '💛 Curriculo',
+          'nav-articles': '💛 Artigos',
+          'about-title': '💜 Diana Regina',
+          'about-intro': 'Sou formada em Mecatrônica Industrial e atuo como desenvolvedora frontend há mais de 5 anos.',
+          'journey-1': 'Comecei minha carreira trabalhando em uma consultoria com React, Vue, Typescript, Rails e Elixir para empresas como C&A, Banco BV e Vagas.com.',
+          'journey-2': 'Trabalhei na startup Finbits, empresa focada em tesouraria pro B2B por mais de um ano, desenvolvendo features e migrando entre libs de UI.',
+          'journey-3': 'Participei do programa GirlsInCloud da dataRain e WoMakersCode, expandindo meus conhecimentos em cloud computing.',
+          'journey-4': 'Atualmente estou no Tino, startup focada em concessão de crédito para PMEs do Brasil, liderando o desenvolvimento frontend do checkout.',
+          'values-title': 'Meus valores',
+          'value-1': 'Desenvolver produtos com alta qualidade e experiência para os usuários',
+          'value-2': 'Atender as necessidades das empresas',
+          'value-3': 'Inovar e participar das decisões',
+          'value-4': 'Compartilhar conhecimento',
+          'value-5': 'Trabalhar com autonomia e flexibilidade',
+          'skills-title': '💜 Habilidades',
+          'frontend-title': 'Linguagens Frontend',
+          'backend-title': 'Linguagens Backend',
+          'technologies-title': 'Tecnologias',
+          'testing-title': 'Testes',
+          'design-title': 'Design',
+          'cloud-title': 'Cloud & Tools',
+          'experience-title': '💜 Experiências',
+          'experience-tino-title': 'Frontend Software Developer (Senior) - Tino',
+          'education-title': '💜 Formação',
+          'footer-made': 'made with 💕 by Diana Regina',
+          // Add more translations as needed
+        }
+      };
+      
+      // Function to update content based on selected language
+      function updateContent(language) {
+        console.log('Updating content to language:', language);
+        try {
+          // Update navigation
+          document.querySelectorAll('.header__nav a')[0].textContent = translations[language]['nav-curriculum'];
+          document.querySelectorAll('.header__nav a')[1].textContent = translations[language]['nav-articles'];
+          
+          // Update about section
+          document.querySelector('#about h1').textContent = translations[language]['about-title'];
+          document.querySelector('.about__intro').textContent = translations[language]['about-intro'];
+          
+          // Update journey items
+          const journeyItems = document.querySelectorAll('.about__journey-item .about__journey-content p');
+          journeyItems[0].textContent = translations[language]['journey-1'];
+          journeyItems[1].textContent = translations[language]['journey-2'];
+          journeyItems[2].textContent = translations[language]['journey-3'];
+          journeyItems[3].textContent = translations[language]['journey-4'];
+          
+          // Update values
+          document.querySelector('.about__values h3').textContent = translations[language]['values-title'];
+          const valueItems = document.querySelectorAll('.about__values-list li span:not(.about__value-icon)');
+          valueItems[0].textContent = translations[language]['value-1'];
+          valueItems[1].textContent = translations[language]['value-2'];
+          valueItems[2].textContent = translations[language]['value-3'];
+          valueItems[3].textContent = translations[language]['value-4'];
+          valueItems[4].textContent = translations[language]['value-5'];
+          
+          // Update skills section
+          document.querySelector('#skills h1').textContent = translations[language]['skills-title'];
+          const skillTitles = document.querySelectorAll('.skills h2');
+          skillTitles[0].textContent = translations[language]['frontend-title'];
+          skillTitles[1].textContent = translations[language]['backend-title'];
+          skillTitles[2].textContent = translations[language]['technologies-title'];
+          skillTitles[3].textContent = translations[language]['testing-title'];
+          skillTitles[4].textContent = translations[language]['design-title'];
+          skillTitles[5].textContent = translations[language]['cloud-title'];
+          
+          // Update experience section
+          document.querySelector('#experience h1').textContent = translations[language]['experience-title'];
+          document.querySelector('.experience__item h2').textContent = translations[language]['experience-tino-title'];
+          
+          // Update education section
+          document.querySelector('#education h1').textContent = translations[language]['education-title'];
+          
+          // Update footer
+          document.querySelector('footer p').textContent = translations[language]['footer-made'];
+        } catch (error) {
+          console.error('Error updating content:', error);
+        }
+      }
     });
   </script>
 </body>

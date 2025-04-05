@@ -21,6 +21,14 @@
     <header class="header">
       <div class="header__container">
         <a class="header__btn" href="./index.html">←</a>
+        <div class="language-toggle-container">
+          <span class="lang-label">PT</span>
+          <label class="language-toggle">
+            <input type="checkbox" id="language-switch" aria-label="Toggle language">
+            <span class="slider"></span>
+          </label>
+          <span class="lang-label">EN</span>
+        </div>
       </div>
     </header>
     <!-- End Header-->
@@ -221,47 +229,215 @@
     </footer>
     <!-- End Footer -->
 
+    <!-- Scripts -->
+    <script src="scripts/translations.js"></script>
+    <script src="scripts/language.js"></script>
+    <script src="scripts/articles-translations.js"></script>
     <script>
-      const themeToggle = document.getElementById('theme-toggle');
-      const scrollToTopButton = document.getElementById('scroll-to-top');
-      const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-      
-      // Check for saved theme preference or use system preference
-      const currentTheme = localStorage.getItem('theme') || 
-        (prefersDarkScheme.matches ? 'dark' : 'light');
-      
-      // Apply the saved theme
-      document.body.setAttribute('data-theme', currentTheme);
-      updateThemeIcon(currentTheme);
-      
-      // Toggle theme on button click
-      themeToggle.addEventListener('click', () => {
-        const newTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-        document.body.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme);
-      });
-      
-      function updateThemeIcon(theme) {
-        themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
-      }
-
-      // Handle scroll behavior for theme toggle
-      window.addEventListener('scroll', function() {
-        const scrollPosition = window.scrollY + window.innerHeight;
-        const footer = document.querySelector('footer');
-        const footerPosition = footer.offsetTop;
-
-        if (scrollPosition >= footerPosition) {
-          themeToggle.classList.add('hidden');
-        } else {
-          themeToggle.classList.remove('hidden');
+      document.addEventListener('DOMContentLoaded', function() {
+        const themeToggle = document.getElementById('theme-toggle');
+        const scrollToTopButton = document.getElementById('scroll-to-top');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // Check for saved theme preference or use system preference
+        const currentTheme = localStorage.getItem('theme') || 
+          (prefersDarkScheme.matches ? 'dark' : 'light');
+        
+        // Apply the saved theme
+        document.body.setAttribute('data-theme', currentTheme);
+        updateThemeIcon(currentTheme);
+        
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+          const newTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+          document.body.setAttribute('data-theme', newTheme);
+          localStorage.setItem('theme', newTheme);
+          updateThemeIcon(newTheme);
+        });
+        
+        function updateThemeIcon(theme) {
+          themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
         }
-      });
 
-      // Scroll to top functionality
-      scrollToTopButton.addEventListener('click', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Handle scroll behavior for theme toggle
+        window.addEventListener('scroll', function() {
+          const scrollPosition = window.scrollY + window.innerHeight;
+          const footer = document.querySelector('footer');
+          const footerPosition = footer.offsetTop;
+
+          if (scrollPosition >= footerPosition) {
+            themeToggle.classList.add('hidden');
+          } else {
+            themeToggle.classList.remove('hidden');
+          }
+        });
+
+        // Scroll to top functionality
+        scrollToTopButton.addEventListener('click', function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Language toggle functionality
+        const languageSwitch = document.getElementById('language-switch');
+        console.log('Language switch element:', languageSwitch);
+        
+        if (languageSwitch) {
+          // Always set Portuguese as default, but respect saved preferences
+          const savedLanguage = localStorage.getItem('language');
+          const currentLanguage = savedLanguage || 'pt';
+          console.log('Current language:', currentLanguage);
+          
+          // Apply the language
+          document.body.setAttribute('data-language', currentLanguage);
+          languageSwitch.checked = currentLanguage === 'en';
+          
+          // If saved language is English, update content accordingly
+          if (currentLanguage === 'en') {
+            updateContent('en');
+          } else {
+            // Force Portuguese otherwise
+            localStorage.setItem('language', 'pt');
+          }
+          
+          // Toggle language on switch change
+          languageSwitch.addEventListener('change', function() {
+            console.log('Toggle clicked, new state:', this.checked);
+            const newLanguage = this.checked ? 'en' : 'pt';
+            document.body.setAttribute('data-language', newLanguage);
+            localStorage.setItem('language', newLanguage);
+            updateContent(newLanguage);
+          });
+        } else {
+          console.error('Language switch element not found!');
+        }
+
+        // Translations for articles.html
+        const translations = {
+          en: {
+            'back-button': '←',
+            'article-tag-analytics': '💥 analytics',
+            'article-tag-frontend': '💥 frontend',
+            'article-tag-data-driven': '💥 data-driven',
+            'article-snowplow-title': '💜 From click to strategy: how we use Snowplow Analytics to emit and capture click events',
+            'article-snowplow-content': 'Discover how we use Snowplow, a website and application tracking tool to make better business and product decisions here at Tino. Snowplow Analytics is an open source tool for collecting, storing and analyzing data on websites and applications...',
+            'article-link': 'continue reading →',
+            'article-tag-html': '💥 html',
+            'article-tag-first-steps': '💥 first steps',
+            'article-html-title': '💜 Taking the first steps with HTML',
+            'article-html-content': 'We can say that frontend is composed of 3 pillars: structure, style and behavior. HTML takes care of the structure, a markup language that will give meaning to the content presented on the screen...',
+            'article-tag-devtools': '💥 devtools',
+            'article-tag-css': '💥 css',
+            'article-realtime-title': '💜 Saving files in realtime with devtools on your machine',
+            'article-realtime-content': 'It\'s quite common in a programmer\'s daily life to pull a frontend task, have to develop a layout and end up using the Elements tab of devtools to test how certain style properties will reflect on that layout...',
+            'article-tag-arduino': '💥 arduino',
+            'article-tag-electronics': '💥 electronics',
+            'article-tag-c': '💥 c',
+            'article-arduino-title': '💜 How to make a LED blinker with Arduino UNO + Thinker Card',
+            'article-arduino-content': 'In this article I will show you how to use Arduino UNO to make a LED blinker and also introduce you to some nice software to assemble circuits in case you don\'t have the materials I\'ll show here. In other words, it\'s easy to play with LEDs today. What a party!!',
+            'article-tag-mindflex': '💥 mindflex',
+            'article-mindflex-title': '💜 How to read brain signals with Mindlfex and Arduino',
+            'article-mindflex-content': 'Have you ever thought about collecting the electrical signals from your brain in a very easy and inexpensive way? If so, you\'ll be very happy to meet the Mindflex, a toy that was manufactured by Neurosky company around 2009...',
+            'article-tag-github': '💥 github',
+            'article-tag-readme': '💥 readme',
+            'article-tag-projects': '💥 projects',
+            'article-readme-title': '💜 How to write an amazing README.md on Github',
+            'article-readme-content': 'After developing that amazing project, having gone through several troubles with the application and Git, you opened it on Github for the community. But your tasks are not over, it\'s time to document your project! And nothing better than a good README.md....',
+            'footer-made': 'made with 💕 by Diana Regina',
+          },
+          pt: {
+            'back-button': '←',
+            'article-tag-analytics': '💥 analytics',
+            'article-tag-frontend': '💥 frontend',
+            'article-tag-data-driven': '💥 data-driven',
+            'article-snowplow-title': '💜 Do clique à estratégia: como usamos o Snowplow Analytics para emitir e capturar eventos de clique',
+            'article-snowplow-content': 'Descubra como utilizamos o Snowplow, uma ferramenta de rastreamento de sites e aplicações para tomar melhores decisões de negocio e produto aqui no Tino. O Snowplow Analytics é uma ferramenta open source destinada a coleta, armazenamento e analise de dados em sites e aplicativos...',
+            'article-link': 'continuar lendo →',
+            'article-tag-html': '💥 html',
+            'article-tag-first-steps': '💥 primeiros passos',
+            'article-html-title': '💜 Dando os primeiros passos com HTML',
+            'article-html-content': 'Podemos dizer que o frontend é composto por 3 pilares: estrutura, estilo e comportamento. Quem cuida da estrutura é o HTML, uma linguagem de marcação que dará sentido ao conteúdo apresentado na tela...',
+            'article-tag-devtools': '💥 devtools',
+            'article-tag-css': '💥 css',
+            'article-realtime-title': '💜 Salvando arquivos em realtime com devtools na sua máquina',
+            'article-realtime-content': 'É bastante comum no dia a dia de um programador puxar uma tarefa de frontend, ter que desenvolver um layout e acabar usando a aba Elements do devtools para testar como determinadas propriedades de estilo vão refletir sobre esse layout...',
+            'article-tag-arduino': '💥 arduino',
+            'article-tag-electronics': '💥 eletrônica',
+            'article-tag-c': '💥 c',
+            'article-arduino-title': '💜 Como fazer um pisca-pisca com LED e ArduinoUNO + Thinker Card',
+            'article-arduino-content': 'Neste artigo vou mostrar como usar o Arduino UNO para fazer um pisca pisca com um LED e de quebra te apresentar um software bem bacana para montar circuitos caso você não tenha os materiais que mostrarei aqui. Ou seja, tá fácil brincar com os LED\'s hoje. Ai que festa!!',
+            'article-tag-mindflex': '💥 mindflex',
+            'article-mindflex-title': '💜 Como ler sinais cerebrais com Mindlfex e Arduino',
+            'article-mindflex-content': 'Já pensou em coletar os sinais elétricos do seu cérebro de um jeito muito fácil e barato? Se sim, vai ficar muito feliz em conhecer o Mindflex, um brinquedo que foi fabricado pela empresa Neurosky em meados de 2009...',
+            'article-tag-github': '💥 github',
+            'article-tag-readme': '💥 readme',
+            'article-tag-projects': '💥 projetos',
+            'article-readme-title': '💜 Como escrever um README.md sensacional no Github',
+            'article-readme-content': 'Depois de desenvolver aquele projeto incrível, ter passado vários perrengues com a aplicação e Git, você abriu no Github para a comunidade. Mas as suas tarefas não terminaram, está na hora de documentar o seu projeto! E nada melhor do que um bom README.md....',
+            'footer-made': 'made with 💕 by Diana Regina',
+          }
+        };
+        
+        // Function to update content based on selected language
+        function updateContent(language) {
+          try {
+            console.log('Updating content to language:', language);
+            // Update back button
+            document.querySelector('.header__btn').textContent = translations[language]['back-button'];
+            
+            // Update article cards - Snowplow
+            document.querySelector('#article-snowplow .article__tag:nth-child(1)').textContent = translations[language]['article-tag-analytics'];
+            document.querySelector('#article-snowplow .article__tag:nth-child(2)').textContent = translations[language]['article-tag-frontend'];
+            document.querySelector('#article-snowplow .article__tag:nth-child(3)').textContent = translations[language]['article-tag-data-driven'];
+            document.querySelector('#article-snowplow h1').textContent = translations[language]['article-snowplow-title'];
+            document.querySelector('#article-snowplow p').textContent = translations[language]['article-snowplow-content'];
+            document.querySelector('#article-snowplow .article__link').textContent = translations[language]['article-link'];
+            
+            // Update article cards - HTML
+            document.querySelector('#article-html .article__tag:nth-child(1)').textContent = translations[language]['article-tag-html'];
+            document.querySelector('#article-html .article__tag:nth-child(2)').textContent = translations[language]['article-tag-frontend'];
+            document.querySelector('#article-html .article__tag:nth-child(3)').textContent = translations[language]['article-tag-first-steps'];
+            document.querySelector('#article-html h1').textContent = translations[language]['article-html-title'];
+            document.querySelector('#article-html p').textContent = translations[language]['article-html-content'];
+            document.querySelector('#article-html .article__link').textContent = translations[language]['article-link'];
+            
+            // Update article cards - Realtime
+            document.querySelector('#article-real-time .article__tag:nth-child(1)').textContent = translations[language]['article-tag-devtools'];
+            document.querySelector('#article-real-time .article__tag:nth-child(2)').textContent = translations[language]['article-tag-frontend'];
+            document.querySelector('#article-real-time .article__tag:nth-child(3)').textContent = translations[language]['article-tag-css'];
+            document.querySelector('#article-real-time h1').textContent = translations[language]['article-realtime-title'];
+            document.querySelector('#article-real-time p').textContent = translations[language]['article-realtime-content'];
+            document.querySelector('#article-real-time .article__link').textContent = translations[language]['article-link'];
+            
+            // Update article cards - Arduino
+            document.querySelector('#article-arduino .article__tag:nth-child(1)').textContent = translations[language]['article-tag-arduino'];
+            document.querySelector('#article-arduino .article__tag:nth-child(2)').textContent = translations[language]['article-tag-electronics'];
+            document.querySelector('#article-arduino .article__tag:nth-child(3)').textContent = translations[language]['article-tag-c'];
+            document.querySelector('#article-arduino h1').textContent = translations[language]['article-arduino-title'];
+            document.querySelector('#article-arduino p').textContent = translations[language]['article-arduino-content'];
+            document.querySelector('#article-arduino .article__link').textContent = translations[language]['article-link'];
+            
+            // Update article cards - Mindflex
+            document.querySelector('#article-mindflex .article__tag:nth-child(1)').textContent = translations[language]['article-tag-arduino'];
+            document.querySelector('#article-mindflex .article__tag:nth-child(2)').textContent = translations[language]['article-tag-mindflex'];
+            document.querySelector('#article-mindflex .article__tag:nth-child(3)').textContent = translations[language]['article-tag-c'];
+            document.querySelector('#article-mindflex h1').textContent = translations[language]['article-mindflex-title'];
+            document.querySelector('#article-mindflex p').textContent = translations[language]['article-mindflex-content'];
+            document.querySelector('#article-mindflex .article__link').textContent = translations[language]['article-link'];
+            
+            // Update article cards - README
+            document.querySelector('#article-readme .article__tag:nth-child(1)').textContent = translations[language]['article-tag-github'];
+            document.querySelector('#article-readme .article__tag:nth-child(2)').textContent = translations[language]['article-tag-readme'];
+            document.querySelector('#article-readme .article__tag:nth-child(3)').textContent = translations[language]['article-tag-projects'];
+            document.querySelector('#article-readme h1').textContent = translations[language]['article-readme-title'];
+            document.querySelector('#article-readme p').textContent = translations[language]['article-readme-content'];
+            document.querySelector('#article-readme .article__link').textContent = translations[language]['article-link'];
+            
+            // Update footer
+            document.querySelector('footer p').textContent = translations[language]['footer-made'];
+          } catch (error) {
+            console.error('Error updating content:', error);
+          }
+        }
       });
     </script>
   </body>

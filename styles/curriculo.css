@@ -8,13 +8,22 @@ body {
 }
 
 header {
-  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #000;
 }
 
 header a {
   color: #000;
   text-decoration: none;
   font-weight: 500;
+}
+
+header a:hover {
+  text-decoration: underline;
 }
 
 main {
@@ -201,4 +210,67 @@ footer a:hover {
 .floating-scroll-top:hover {
   transform: scale(1.1);
   background-color: #333;
+}
+
+/* Language Toggle */
+.language-toggle-container {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.lang-label {
+  margin: 0 5px;
+  font-size: 0.9rem;
+}
+
+.language-toggle {
+  position: relative;
+  display: inline-block;
+  width: 40px; 
+  height: 22px;
+}
+
+.language-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .3s;
+  border-radius: 22px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .3s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #000;
+}
+
+input:checked + .slider:before {
+  transform: translateX(18px);
+}
+
+@media print {
+  .language-toggle-container {
+    display: none;
+  }
 }
