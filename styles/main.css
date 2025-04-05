@@ -7,15 +7,23 @@
 }
 
 :root {
+  /* Light theme variables */
   --color-purple: #b4a7d6;
   --color-black: #1c1c1cff;
   --color-white: #fff;
+  --color-background: #fff;
+  --color-text: #1c1c1cff;
 
   --screen-mobile: 320;
   --screen-tablet: 890;
   --screen-desktop: 1200;
 
   --gap: 8px;
+}
+
+[data-theme="dark"] {
+  --color-background: #1c1c1cff;
+  --color-text: #fff;
 }
 
 ::-moz-selection { /* Code for Firefox */
@@ -30,7 +38,8 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: var(--color-black);
+  background-color: var(--color-background);
+  color: var(--color-text);
   margin: 0;
 
   display: flex;
@@ -66,7 +75,7 @@ time,
 strong,
 button {
   margin: 0;
-  color: var(--color-white);
+  color: var(--color-text);
   line-height: 32px;
 }
 

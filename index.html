@@ -16,8 +16,8 @@
 <body>
   <!-- Start Header -->
   <header class="header">
+    <button id="theme-toggle" class="header__btn" aria-label="Toggle dark mode">🌙</button>
     <a class="header__btn" href="./assets/cv.pdf" target="_blank">💛 Curriculo</a>
-    <!-- <a class="header__btn" href="./resume.html" target="_blank">💛 Curriculo</a> -->
     <a class="header__btn" href="./articles.html">💛 Artigos</a>
   </header>
   <!-- End Header-->
@@ -217,6 +217,31 @@
     </nav>
   </footer>
   <!-- End Footer -->
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    // Check for saved theme preference or use system preference
+    const currentTheme = localStorage.getItem('theme') || 
+      (prefersDarkScheme.matches ? 'dark' : 'light');
+    
+    // Apply the saved theme
+    document.body.setAttribute('data-theme', currentTheme);
+    updateThemeIcon(currentTheme);
+    
+    // Toggle theme on button click
+    themeToggle.addEventListener('click', () => {
+      const newTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      document.body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeIcon(newTheme);
+    });
+    
+    function updateThemeIcon(theme) {
+      themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
+    }
+  </script>
 </body>
 
 </html>
