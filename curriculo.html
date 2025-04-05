@@ -11,6 +11,7 @@
       <a href="./index.html">Voltar</a>
     </header>
 
+    <button id="scroll-to-top" class="floating-scroll-top" aria-label="Scroll to top">⬆️</button>
     <button id="download-pdf" class="floating-download" aria-label="Download PDF">Download PDF</button>
 
     <main>
@@ -166,8 +167,43 @@
     </footer>
 
     <script>
-      document.getElementById('download-pdf').addEventListener('click', function() {
+      const downloadButton = document.getElementById('download-pdf');
+      
+      // Handle PDF download
+      downloadButton.addEventListener('click', function() {
         window.print();
+      });
+
+      // Handle scroll behavior only on mobile
+      function isMobile() {
+        return window.innerWidth <= 600;
+      }
+
+      window.addEventListener('scroll', function() {
+        if (!isMobile()) return;
+
+        const scrollPosition = window.scrollY + window.innerHeight;
+        const footer = document.querySelector('footer');
+        const footerPosition = footer.offsetTop;
+
+        if (scrollPosition >= footerPosition) {
+          downloadButton.classList.add('hidden');
+        } else {
+          downloadButton.classList.remove('hidden');
+        }
+      });
+
+      // Also handle window resize
+      window.addEventListener('resize', function() {
+        if (!isMobile()) {
+          downloadButton.classList.remove('hidden');
+        }
+      });
+
+      // Scroll to top functionality
+      const scrollToTopButton = document.getElementById('scroll-to-top');
+      scrollToTopButton.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     </script>
   </body>

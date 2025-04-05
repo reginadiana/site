@@ -25,6 +25,7 @@
   </header>
   <!-- End Header-->
 
+  <button id="scroll-to-top" class="floating-scroll-top" aria-label="Scroll to top">⬆️</button>
   <button id="theme-toggle" class="floating-theme-toggle" aria-label="Toggle dark mode">🌙</button>
 
   <!-- Start About Section -->
@@ -311,6 +312,7 @@
 
   <script>
     const themeToggle = document.getElementById('theme-toggle');
+    const scrollToTopButton = document.getElementById('scroll-to-top');
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
     
     // Check for saved theme preference or use system preference
@@ -332,6 +334,24 @@
     function updateThemeIcon(theme) {
       themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
     }
+
+    // Handle scroll behavior for theme toggle
+    window.addEventListener('scroll', function() {
+      const scrollPosition = window.scrollY + window.innerHeight;
+      const footer = document.querySelector('footer');
+      const footerPosition = footer.offsetTop;
+
+      if (scrollPosition >= footerPosition) {
+        themeToggle.classList.add('hidden');
+      } else {
+        themeToggle.classList.remove('hidden');
+      }
+    });
+
+    // Scroll to top functionality
+    scrollToTopButton.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   </script>
 </body>
 

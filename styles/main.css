@@ -107,7 +107,7 @@ header, section, footer {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background-color: var(--color-purple);
+  background-color: transparent;
   color: var(--color-black);
   border: none;
   cursor: pointer;
@@ -122,6 +122,46 @@ header, section, footer {
 
 .floating-theme-toggle:hover {
   transform: scale(1.1);
+  background-color: #333;
+}
+
+.floating-theme-toggle.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+
+.floating-scroll-top {
+  position: fixed;
+  bottom: 90px; /* Positioned above the dark mode button */
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 101;
+  opacity: 1;
+  transform: translateY(0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating-scroll-top.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+
+.floating-scroll-top:hover {
+  transform: scale(1.1);
+  background-color: #333;
 }
 
 .experience__inner {

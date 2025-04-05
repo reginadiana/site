@@ -65,23 +65,59 @@ footer {
   margin-top: 40px;
   padding-top: 20px;
   border-top: 1px solid #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+footer p {
+  margin: 0;
+  font-weight: 500;
+}
+
+footer nav {
+  margin-left: 20px;
 }
 
 footer ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  gap: 20px;
 }
 
 footer li {
   display: inline;
-  margin-right: 20px;
+  margin: 0;
 }
 
 footer a {
   color: #000;
   text-decoration: none;
   font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+footer a:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 600px) {
+  footer {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  footer nav {
+    margin-left: 0;
+  }
+
+  footer ul {
+    justify-content: center;
+  }
 }
 
 .floating-download {
@@ -99,12 +135,20 @@ footer a {
   cursor: pointer;
   transition: all 0.3s ease;
   z-index: 100;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .floating-download:hover {
   background-color: #cc0000;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.floating-download.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
 }
 
 @media print {
@@ -123,4 +167,38 @@ footer a {
   .floating-download {
     display: none;
   }
-} 
+}
+
+
+.floating-scroll-top {
+  position: fixed;
+  bottom: 70px; /* Positioned above the dark mode button */
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 101;
+  opacity: 1;
+  transform: translateY(0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating-scroll-top.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+
+.floating-scroll-top:hover {
+  transform: scale(1.1);
+  background-color: #333;
+}
