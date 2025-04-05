@@ -14,8 +14,4 @@
     flex-direction: row;
     gap: 32px;
   }
-  
-  .about__content p {
-    width: 60%;
-  }
 }
