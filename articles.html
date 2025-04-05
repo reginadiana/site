@@ -23,6 +23,8 @@
     </header>
     <!-- End Header-->
 
+    <button id="theme-toggle" class="floating-theme-toggle" aria-label="Toggle dark mode">🌙</button>
+
     <section id="article-html">
       <div class="about__resume">
         <strong>💥 html</strong>
@@ -134,5 +136,30 @@
       </nav>
     </footer>
     <!-- End Footer -->
+
+    <script>
+      const themeToggle = document.getElementById('theme-toggle');
+      const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+      
+      // Check for saved theme preference or use system preference
+      const currentTheme = localStorage.getItem('theme') || 
+        (prefersDarkScheme.matches ? 'dark' : 'light');
+      
+      // Apply the saved theme
+      document.body.setAttribute('data-theme', currentTheme);
+      updateThemeIcon(currentTheme);
+      
+      // Toggle theme on button click
+      themeToggle.addEventListener('click', () => {
+        const newTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        document.body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+      });
+      
+      function updateThemeIcon(theme) {
+        themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
+      }
+    </script>
   </body>
 </html>
