@@ -266,11 +266,9 @@ header, section, footer {
   margin-bottom: 16px;
   color: var(--color-text);
   position: relative;
-  padding-left: 16px;
 }
 
 .education__item h2::before {
-  content: "🎓";
   position: absolute;
   left: -8px;
   top: 50%;
@@ -280,7 +278,6 @@ header, section, footer {
 .education__item p {
   margin-bottom: 16px;
   line-height: 1.6;
-  padding-left: 16px;
 }
 
 .education__item ul {
